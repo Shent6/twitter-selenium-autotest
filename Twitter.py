@@ -52,6 +52,14 @@ class TwitterTest(unittest.TestCase):
         newFollowCount = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, ".//*[@id='page-container']/div[1]/div[1]/div/div[3]/ul/li[2]/a/span[2]"))).text
         self.assertEqual(str(int(initialFollowCount) + 1), newFollowCount)
 
+    def test_login_neg(self):
+        enterButton = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//button[@class='submit btn primary-btn flex-table-btn js-submit']")))
+        enterButton.click()
+
+        error_message = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, ".//*[@id='message-drawer']/div/div/span")))
+        self.assertTrue(error_message)
+
+
 
     def tearDown(self):
         driver.quit()
